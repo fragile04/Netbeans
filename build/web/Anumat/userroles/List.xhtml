@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListUserrolesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListUserrolesEmpty}" rendered="#{userrolesController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{userrolesController.items.rowCount > 0}">
+                    <h:outputText value="#{userrolesController.pagination.pageFirstItem + 1}..#{userrolesController.pagination.pageLastItem + 1}/#{userrolesController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{userrolesController.previous}" value="#{bundle.Previous} #{userrolesController.pagination.pageSize}" rendered="#{userrolesController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{userrolesController.next}" value="#{bundle.Next} #{userrolesController.pagination.pageSize}" rendered="#{userrolesController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{userrolesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUserrolesTitle_userrolesPK_userRoleID}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.userrolesPK.userRoleID}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUserrolesTitle_roles}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.roles}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUserrolesTitle_users}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.users}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{userrolesController.prepareView}" value="#{bundle.ListUserrolesViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{userrolesController.prepareEdit}" value="#{bundle.ListUserrolesEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{userrolesController.destroy}" value="#{bundle.ListUserrolesDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{userrolesController.prepareCreate}" value="#{bundle.ListUserrolesCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListUserrolesIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

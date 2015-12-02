@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePermissionsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreatePermissionsLabel_permissionsID}" for="permissionsID" />
+                    <h:inputText id="permissionsID" value="#{permissionsController.selected.permissionsID}" title="#{bundle.CreatePermissionsTitle_permissionsID}" required="true" requiredMessage="#{bundle.CreatePermissionsRequiredMessage_permissionsID}"/>
+                    <h:outputLabel value="#{bundle.CreatePermissionsLabel_permissionsTilte}" for="permissionsTilte" />
+                    <h:inputText id="permissionsTilte" value="#{permissionsController.selected.permissionsTilte}" title="#{bundle.CreatePermissionsTitle_permissionsTilte}" />
+                    <h:outputLabel value="#{bundle.CreatePermissionsLabel_permissionsConstantName}" for="permissionsConstantName" />
+                    <h:inputText id="permissionsConstantName" value="#{permissionsController.selected.permissionsConstantName}" title="#{bundle.CreatePermissionsTitle_permissionsConstantName}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{permissionsController.create}" value="#{bundle.CreatePermissionsSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{permissionsController.prepareList}" value="#{bundle.CreatePermissionsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreatePermissionsIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

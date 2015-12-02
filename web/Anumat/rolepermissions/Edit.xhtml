@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditRolepermissionsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditRolepermissionsLabel_rolepermissionsPK_rolePermissionsID}" for="rolepermissionsPK_rolePermissionsID" />
+                    <h:inputText id="rolepermissionsPK_rolePermissionsID" value="#{rolepermissionsController.selected.rolepermissionsPK.rolePermissionsID}" title="#{bundle.EditRolepermissionsTitle_rolepermissionsPK_rolePermissionsID}" required="true" requiredMessage="#{bundle.EditRolepermissionsRequiredMessage_rolepermissionsPK_rolePermissionsID}"/>
+                    <h:outputLabel value="#{bundle.EditRolepermissionsLabel_permissions}" for="permissions" />
+                    <h:selectOneMenu id="permissions" value="#{rolepermissionsController.selected.permissions}" title="#{bundle.EditRolepermissionsTitle_permissions}" required="true" requiredMessage="#{bundle.EditRolepermissionsRequiredMessage_permissions}">
+                        <f:selectItems value="#{permissionsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditRolepermissionsLabel_roles}" for="roles" />
+                    <h:selectOneMenu id="roles" value="#{rolepermissionsController.selected.roles}" title="#{bundle.EditRolepermissionsTitle_roles}" required="true" requiredMessage="#{bundle.EditRolepermissionsRequiredMessage_roles}">
+                        <f:selectItems value="#{rolesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{rolepermissionsController.update}" value="#{bundle.EditRolepermissionsSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditRolepermissionsViewLink}"/>
+                <br />
+                <h:commandLink action="#{rolepermissionsController.prepareList}" value="#{bundle.EditRolepermissionsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditRolepermissionsIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
